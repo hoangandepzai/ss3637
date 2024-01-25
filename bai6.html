@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin sinh viên</title>
+</head>
+<body>
+    <div>
+        <h1>Create Student</h1>
+        <form id="studentForm">
+            <label for="studentId">Student ID:</label>
+            <input type="text" id="studentId" /><br>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" /><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" /><br>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" /><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" /><br>
+
+            <button type="button" onclick="createStudent()">Create</button>
+        </form>
+    </div>
+
+    <div id="studentInfo" style="margin-top: 20px; display: none;">
+        <h2>Student Management:</h2>
+        <p id="infoOutput"></p>
+    </div>
+
+    <script>
+        function createStudent() {
+            let studentId = document.getElementById('studentId').value.trim();
+            let studentName = document.getElementById('studentName').value.trim();
+            let age = parseInt(document.getElementById('age').value, 10);
+            let phone = document.getElementById('phone').value.trim();
+            let email = document.getElementById('email').value.trim();
+            if (studentId.length === 6 &&
+                studentName !== '' &&
+                !isNaN(age) && age >= 18 &&
+                /^\d{10,11}$/.test(phone) &&
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                let infoOutput = document.getElementById('infoOutput');
+                infoOutput.innerHTML = `<strong>Student ID:</strong> ${studentId}<br>
+                                        <strong>Student Name:</strong> ${studentName}<br>
+                                        <strong>Age:</strong> ${age}<br>
+                                        <strong>Phone:</strong> ${phone}<br>
+                                        <strong>Email:</strong> ${email}`;
+                let studentInfo = document.getElementById('studentInfo');
+                studentInfo.style.display = 'block';
+            } else {
+                alert('Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.');
+            }
+        }
+    </script>
+</body>
+</html>
